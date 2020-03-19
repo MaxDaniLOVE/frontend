@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './UserItem.scss'
-import Avatar from '../../shared/UIElements/Avatar';
-import Card from '../../shared/UIElements/Card';
+import Avatar from '../../shared/components/UIElements/Avatar';
+import Card from '../../shared/components/UIElements/Card';
 
 const UserItem = ({id, image, name, placeCount}) => {
   return (
