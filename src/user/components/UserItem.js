@@ -1,17 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './UserItem.scss'
+import Avatar from '../../shared/UIElements/Avatar';
+import Card from '../../shared/UIElements/Card';
 
 const UserItem = ({id, image, name, placeCount}) => {
   return (
-    <li className="list-group-item list-group-item-action user-item">
+    <li className="user-item">
       <div className="user-item__content">
-        <div className="user-item__image">
-          <img src={image} alt={name} />
-        </div>
-        <div className="user-item__info">
-          <h2>{name}</h2>
-          <h3>{placeCount} {placeCount === 1 ? ' place' : ' places'}</h3>
-        </div>
+        <Card>
+          <Link to={`/${id}/places`}>
+            <div className="user-item__image">
+              <Avatar image={image} alt={name} heigth={'85px'} width={'85px'}/>
+            </div>
+            <div className="user-item__info">
+              <h2>{name}</h2>
+              <h3>{placeCount} {placeCount === 1 ? ' place' : ' places'}</h3>
+            </div>
+          </Link>
+        </Card>
       </div>
     </li>
   );
