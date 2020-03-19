@@ -1,5 +1,5 @@
 import React from 'react';
-import './UserItem.css'
+import './UserItem.scss'
 
 const UserItem = ({id, image, name, placeCount}) => {
   return (
