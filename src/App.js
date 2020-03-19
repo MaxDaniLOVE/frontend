@@ -7,21 +7,23 @@ import {
 } from 'react-router-dom';
 import Users from './user/pages/Users';
 import NewPlace from './places/pages/NewPlace';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact >
-          <Users />
-        </Route>
-        <Route path="/places/new" exact >
-          <NewPlace />
-        </Route>
-        <Redirect to="/"/>
-      </Switch>
-    </Router>
+    <div className="container">
+      <Router>
+        <Switch>
+          <Route path="/" exact >
+            <Users />
+          </Route>
+          <Route path="/places/new" exact >
+            <NewPlace />
+          </Route>
+          <Redirect to="/"/>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 

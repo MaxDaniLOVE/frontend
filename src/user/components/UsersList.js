@@ -4,7 +4,7 @@ import './UsersList.scss'
 
 const UsersList = ({items}) => {
   if(!items.length){
-    return <div className="center">No users found.</div>
+    return <h2 className="center">No users found.</h2>
   }
   return (
     <ul className="list-group">
