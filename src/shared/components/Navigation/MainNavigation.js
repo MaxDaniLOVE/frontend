@@ -1,5 +1,6 @@
 import React from 'react';
 import MainHeader from './MainHeader';
+import NavLinks from './NavLinks';
 import { Link } from 'react-router-dom';
 import './MainNavigation.scss'
 
@@ -15,7 +16,7 @@ const MainNavigation = () => {
         <Link to="/">Your Places</Link>
       </h1>
       <nav>
-        ...
+        <NavLinks />
       </nav>
     </MainHeader>
   );
