@@ -1,4 +1,17 @@
 .user-item{
   list-style-type: none;
   margin: 0.75rem 0;
+  &__content{
+    width: 320px;
+    a{
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  &__info{
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 }

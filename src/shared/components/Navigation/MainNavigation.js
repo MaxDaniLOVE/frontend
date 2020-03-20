@@ -1,6 +1,7 @@
 import React from 'react';
 import MainHeader from './MainHeader';
 import { Link } from 'react-router-dom';
+import './MainNavigation.scss'
 
 const MainNavigation = () => {
   return (

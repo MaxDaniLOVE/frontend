@@ -1,0 +1,20 @@
+.main-navigation__menu-btn{
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  span{
+    &::after{
+      display: block;
+      content: ' ';
+      width: 35px;
+      height: 2px;
+      background-color: #18BC9C;
+    }
+  }
+}
+.main-navigation__title{
+  margin-left: 15px;
+}
