@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../../shared/components/UIElements/Card';
+import Button from '../../shared/components/FormElements/Button';
 
 import './PlaceItem.scss';
 
@@ -20,9 +21,15 @@ const PlaceItem = ({id, image, title, description, address, creatorId, coordinat
           <p>{description}</p>
         </div>
         <div className="place-item__actions">
-          <button className="btn btn-secondary">VIEW ON MAP</button>
-          <button className="btn btn-warning">EDIT</button>
-          <button className="btn btn-danger">DELETE</button>
+          <Button className={'secondary'}>
+            VIEW ON MAP
+          </Button>
+          <Button className={'warning'} to={`/places/${id}`}>
+            EDIT
+          </Button>
+          <Button className={'danger'}>
+            DELETE
+          </Button>
         </div>
       </Card>
     </li>

@@ -8,7 +8,7 @@ const PlaceList = (props) => {
   if(!props.items.length){
     return (
       <Card>
-        <h2 className="center">No users found.</h2>
+        <h2 className="center">No places found.</h2>
         <button className="btn btn-success">Share place</button>
       </Card>
     )
