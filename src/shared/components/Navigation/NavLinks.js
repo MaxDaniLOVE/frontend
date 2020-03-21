@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './NavLinks.scss'
 
-const NavLinks = () => {
+const NavLinks = ({closeDrawerHandler}) => {
   const links = [
     {
       link: '/',
@@ -32,6 +32,7 @@ const NavLinks = () => {
               color: "#fff"
             }}
             key={link}
+            onClick={closeDrawerHandler}
           >
             {label}
           </NavLink>
