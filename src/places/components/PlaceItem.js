@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Card from '../../shared/components/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
 import Modal from '../../shared/components/UIElements/Modal';
-
+import Map from '../../shared/components/UIElements/Map'
 import './PlaceItem.scss';
 
-const PlaceItem = ({id, image, title, description, address, creatorId, coordinates}) => {
+const PlaceItem = ({id, image, title, description, address, creatorId, location}) => {
   const cardStyles = {
     width: '540px',
     height: '600px'
@@ -13,7 +13,6 @@ const PlaceItem = ({id, image, title, description, address, creatorId, coordinat
   const [showMap, setShowMap] = useState(false);
   const openMapHandler = () => setShowMap(true);
   const closeMapHandler = () => setShowMap(false);
-  console.log(address)
   return(
     <React.Fragment>
       <Modal
@@ -25,7 +24,7 @@ const PlaceItem = ({id, image, title, description, address, creatorId, coordinat
         footer={<Button className="danger" onClick={closeMapHandler}>X</Button>}
       >
         <div className="map-container">
-          <h2>THE MAP!</h2>
+          <Map lng={location.lng} lat={location.lat} />
         </div>
       </Modal>
       <li className="place-item__card">

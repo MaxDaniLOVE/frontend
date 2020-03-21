@@ -15,7 +15,7 @@ const PlaceList = (props) => {
   }
   return (
     <ul className="place-list">
-      {props.items.map(({id, imageURL, title, description, address, creator, coordinates}) => 
+      {props.items.map(({id, imageURL, title, description, address, creator, location}) => 
         <PlaceItem
           key={id}
           id={id}
@@ -24,7 +24,7 @@ const PlaceList = (props) => {
           description={description}
           address={address}
           creatorId={creator}
-          coordinates={coordinates}
+          location={location}
         />
       )}
     </ul>

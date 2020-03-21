@@ -15,6 +15,18 @@ const UserPlaces = () => {
         lat: 53.9083105,
         lng: 27.5548751
       },
+    }, 
+    {
+      id: 2,
+      imageURL: 'https://belarusgid.by/wp-content/uploads/2016/08/naroch.jpg',
+      title: 'Naroch',
+      description: 'Love it a lot!',
+      address: 'Narach Lake',
+      creator: '1',
+      location: {
+        lat: 54.8481639,
+        lng: 26.7006121
+      },
     }
   ];
   const userId = useParams().userId;
