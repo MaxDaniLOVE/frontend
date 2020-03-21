@@ -24,3 +24,14 @@ nav{
 .main-navigation__title{
   margin-left: 15px;
 }
+@media only screen and (max-width: 768px) {
+  .main-navigation{
+    justify-content: start;
+    h1{
+      margin: 0 0 0 15px;
+    }
+    &__header-nav {
+      display: none;
+    }
+  }
+}
