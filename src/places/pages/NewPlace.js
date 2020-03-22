@@ -44,6 +44,7 @@ const NewPlace = () => {
     },
     isValid: false
   })
+
   const inputHandler = useCallback((id, isValid, value) => {
     dispatch({
       type: 'INPUT_CHANGE',
@@ -52,7 +53,13 @@ const NewPlace = () => {
       inputId: id
     })
   }, []) // changes function only if changes arguments in array 
-  return <form className="place-form">
+
+  const submitHandler = e => {
+    e.preventDefault();
+    console.log(formState.inputs)
+  }
+
+  return <form className="place-form" onSubmit={submitHandler}>
     <Input
       errorText="Input correct title!"
       element="input"
@@ -69,6 +76,15 @@ const NewPlace = () => {
       type="text"
       label="Description:"
       validators={[VALIDATOR_MINLENGTH(5)]}
+      onChange={inputHandler}
+    />
+    <Input
+      errorText="Input correct address!"
+      element="input"
+      id="address"
+      type="text"
+      label="Address:"
+      validators={[VALIDATOR_REQUIRE()]}
       onChange={inputHandler}
     />
     <Button type="submit" className="success" disabled={!formState.isValid}>ADD PLACE</Button>
