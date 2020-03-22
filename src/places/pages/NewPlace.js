@@ -3,7 +3,7 @@ import Input from '../../shared/components/FormElements/Input';
 
 const NewPlace = () => {
   return <form className="place-form">
-    <Input id={'form-control'} type="text" label="Title" validator={[]} onChange={e => console.log(e.target.value)} />
+    <Input errorText="Enter correct e-mail" id={'form-control'} type="text" label="Title" validator={[]}/>
   </form>
 }
 
