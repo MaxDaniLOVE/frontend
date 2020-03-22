@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useCallback, useReducer } from 'react';
 import Input from '../../shared/components/FormElements/Input';
-import { VALIDATOR_REQUIRE } from '../../shared/utils/validators';
+import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/utils/validators';
 
 const NewPlace = () => {
+  const titleInputHandler = useCallback((id, isValid, value) => {}, []) // changes function only if changes arguments in array 
+  const descriptionInputHandler = useCallback((id, isValid, value) => {}, [])
   return <form className="place-form">
     <Input
-      errorText="Enter correct e-mail"
-      id={'form-control'}
+      errorText="Input correct title!"
+      element="input"
+      id="title-input"
       type="text"
-      label="E-mail:"
+      label="Title:"
       validators={[VALIDATOR_REQUIRE()]}
+      onChange={titleInputHandler}
+    />
+    <Input
+      errorText="Input correct description! (at least 5 characters length)"
+      element="textarea"
+      id="description-input"
+      type="text"
+      label="Description:"
+      validators={[VALIDATOR_MINLENGTH(5)]}
+      onChange={descriptionInputHandler}
     />
   </form>
 }

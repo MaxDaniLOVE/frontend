@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { validate } from '../../utils/validators';
 import './Input.scss';
 
@@ -20,7 +20,8 @@ const inputReducer = (state, action) => {
   }
 }
 
-const Input = ({type, label, validators, onChange, id, placeholder, errorText}) => {
+const Input = (props) => {
+  const {type, label, validators, onChange, id, placeholder, errorText, element} = props;
   const [inputState, dispatch] = useReducer(
       inputReducer,
       {
@@ -29,7 +30,11 @@ const Input = ({type, label, validators, onChange, id, placeholder, errorText}) 
         isTouched: false
       }
     )
-
+  const {isValid, value} = inputState
+  useEffect(() => {
+    onChange(id, isValid, value)
+  }, [id, isValid, onChange, value])
+  
   const changeHandler = (e) => {
     dispatch({type: 'CHANGE_INPUT', value: e.target.value, validators })
   }
@@ -37,20 +42,31 @@ const Input = ({type, label, validators, onChange, id, placeholder, errorText}) 
     dispatch({type: 'BLUR_INPUT', isTouched: true })
   }
   // TODO Add border color for input
+  const content = element === 'input' 
+  ? <input type={type}
+      onChange={changeHandler}
+      onBlur={touchHandler}
+      className="form-control"
+      id={id}
+      aria-describedby="emailHelp"
+      placeholder={placeholder} 
+      value={inputState.value}
+    />
+  : <textarea type={type}
+      onChange={changeHandler}
+      onBlur={touchHandler}
+      className="form-control"
+      id={id}
+      rows={3}
+      aria-describedby="emailHelp"
+      placeholder={placeholder} 
+      value={inputState.value}
+    />
   return (
     <div className='form-input'>
       <label htmlFor={id}>{label}</label>
-      <input type={type}
-        onChange={changeHandler}
-        onBlur={touchHandler}
-        className="form-control"
-        id={id}
-        aria-describedby="emailHelp"
-        placeholder={placeholder} 
-        value={inputState.value}/>
-        {
-          !inputState.isValid && inputState.isTouched && <p>{errorText}</p>
-        }
+        {content}
+        {!inputState.isValid && inputState.isTouched && <p>{errorText}</p>}
     </div>
   );
 }
