@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/utils/validators';
+import Card from '../../shared/components/UIElements/Card';
 import useForm from '../../shared/hooks/form-hook';
 import { useParams } from 'react-router-dom';
 
@@ -51,21 +52,23 @@ const UpdatePlace = () => {
   const identifiedPlace = DUMMY_PLACES.find(({id}) => id === placeId);
 
   useEffect(() => {
-    setFormData(
-      {
-        title: {
-          value: identifiedPlace.title,
-          isValid: true
+    if (identifiedPlace) {
+      setFormData(
+        {
+          title: {
+            value: identifiedPlace.title,
+            isValid: true
+          },
+          description: {
+            value: identifiedPlace.description,
+            isValid: true
+          }
         },
-        description: {
-          value: identifiedPlace.description,
-          isValid: true
-        }
-      },
-      true
-    );
+        true
+      );
+    }
     setIsloading(false)
-  }, [setFormData, identifiedPlace.description, identifiedPlace.title ]);
+  }, [setFormData, identifiedPlace.description, identifiedPlace.title, identifiedPlace]);
 
   const placeUpdateSubmitHandler = event => {
     event.preventDefault();
@@ -75,7 +78,9 @@ const UpdatePlace = () => {
   if (!identifiedPlace) {
     return (
       <div className="center">
-        No places found...
+        <Card>
+          No place found...
+        </Card>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '../../shared/components/UIElements/Card';
-import { Link } from "react-router-dom";
+import Button from '../../shared/components/FormElements/Button';
+
 import PlaceItem from './PlaceItem';
 import './PlaceList.scss';
 
@@ -27,6 +28,7 @@ const PlaceList = (props) => {
           location={location}
         />
       )}
+      <Button to="/places/new" className="primary">ADD NEW PLACE</Button>
     </ul>
   );
 }
