@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH, VALIDATOR_EMAIL } from '../../shared/utils/validators';
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
@@ -7,7 +7,9 @@ import Card from '../../shared/components/UIElements/Card';
 import './Auth.scss';
 
 const Auth = () => {
-  const [formState, inputHandler] = useForm({
+  const [isLoginMode, setIsLoginMode] = useState(true)
+
+  const [formState, inputHandler, setFormData] = useForm({
     email: {
       value: '',
       isValid: false
@@ -23,11 +25,41 @@ const Auth = () => {
     console.log(formState.inputs);
   };
 
+  const switchModeHandler = () => {
+    console.log('switch')
+    if (!isLoginMode) {
+      setFormData({
+        ...formState.inputs,
+        name: undefined
+      }, formState.inputs.email.isValid && formState.inputs.password.isValid)
+    } else {
+      setFormData({
+        ...formState.inputs,
+        name: {
+          value: '',
+          isValid: false
+        }
+      }, false)
+    }
+    setIsLoginMode(prevMode => !prevMode)
+  }
+
   return (
     <div className="auth-page">
       <Card>
         <h3>Please enter your email and password!</h3>
         <form onSubmit={authSubmitHandler}>
+          {!isLoginMode && (<Input
+            element="input"
+            validators={[VALIDATOR_REQUIRE()]}
+            type="text"
+            id="name"
+            label="Your name:"
+            errorText="Input correct name!"
+            onChange={inputHandler}
+          />)
+
+          }
           <Input
             errorText="Input correct e-mail!"
             element="input"
@@ -50,10 +82,14 @@ const Auth = () => {
             value={formState.inputs.password.value}
             valid={formState.inputs.password.isValid}
           />
-          <Button type="submit" className="success" disabled={!formState.isValid}>LOG IN</Button>
+          <Button type="submit" className="success" disabled={!formState.isValid}>
+            {isLoginMode ? 'LOG IN' : 'SIGN UP'}
+          </Button>
         </form>
       </Card>
-      <Button type="button" className="outline-primary">SIGN UP</Button>
+      <Button type="button" className="outline-primary" onClick={switchModeHandler}>
+        SWITCH TO {!isLoginMode ? 'LOG IN' : 'SIGN UP'}
+      </Button>
     </div>
   );
 }
