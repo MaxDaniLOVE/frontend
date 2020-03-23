@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Card from '../../shared/components/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
 import Modal from '../../shared/components/UIElements/Modal';
-import Map from '../../shared/components/UIElements/Map'
+import Map from '../../shared/components/UIElements/Map';
+import { AuthContext } from '../../shared/context/auth-context';
 import './PlaceItem.scss';
 
 const PlaceItem = ({id, image, title, description, address, creatorId, location}) => {
@@ -10,6 +11,9 @@ const PlaceItem = ({id, image, title, description, address, creatorId, location}
     width: '540px',
     height: '600px'
   }
+
+  const auth = useContext(AuthContext);
+
   const [showMap, setShowMap] = useState(false);
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -68,12 +72,12 @@ const PlaceItem = ({id, image, title, description, address, creatorId, location}
             <Button className={'secondary'} onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            <Button className={'warning'} to={`/places/${id}`}>
+            {auth.isLoggedIn && <Button className={'warning'} to={`/places/${id}`}>
               EDIT
-            </Button>
-            <Button className={'danger'} onClick={openConfirmHandler}>
+            </Button>}
+            {auth.isLoggedIn && <Button className={'danger'} onClick={openConfirmHandler}>
               DELETE
-            </Button>
+            </Button>}
           </div>
         </Card>
       </li>
