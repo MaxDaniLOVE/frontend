@@ -1,43 +1,59 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../context/auth-context';
+import Button from '../FormElements/Button';
 import './NavLinks.scss'
 
 const NavLinks = ({closeDrawerHandler}) => {
-  const links = [
-    {
-      link: '/',
-      label: 'All users'
-    },
-    {
-      link: '/u1/places',
-      label: 'My places'
-    },
-    {
-      link: '/places/new',
-      label: 'New place'
-    },
-    {
-      link: '/auth',
-      label: 'Auth'
-    }
-  ]
+  const auth = useContext(AuthContext);
+  console.log(auth)
   return (
     <ul className="nav-links">
-      {
-        links.map(({link, label}) => 
-          <NavLink to={link}
-            exact
-            activeStyle={{
-              fontWeight: "bold",
-              color: "#fff"
-            }}
-            key={link}
-            onClick={closeDrawerHandler}
-          >
-            {label}
-          </NavLink>
-        )
-      }
+      <NavLink to='/'
+        exact
+        activeStyle={{
+          fontWeight: "bold",
+          color: "#fff"
+        }}
+        onClick={closeDrawerHandler}
+      >
+        All users
+      </NavLink>
+      {auth.isLoggedIn && (<NavLink to='/u1/places'
+        exact
+        activeStyle={{
+          fontWeight: "bold",
+          color: "#fff"
+        }}
+        onClick={closeDrawerHandler}
+      >
+        My places
+      </NavLink>)}
+      {auth.isLoggedIn && (<NavLink to='/places/new'
+        exact
+        activeStyle={{
+          fontWeight: "bold",
+          color: "#fff"
+        }}
+        onClick={closeDrawerHandler}
+      >
+        New place
+      </NavLink>)}
+      {!auth.isLoggedIn && (<NavLink to='/auth'
+        exact
+        activeStyle={{
+          fontWeight: "bold",
+          color: "#fff"
+        }}
+        onClick={closeDrawerHandler}
+      >
+        Auth
+      </NavLink>)}
+      {auth.isLoggedIn && (
+        <li>
+          <Button className="outline-warning" onClick={auth.logout}>LOGOUT</Button>
+        </li>
+      )}
     </ul>
   );
 }
