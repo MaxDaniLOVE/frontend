@@ -11,8 +11,21 @@ const PlaceItem = ({id, image, title, description, address, creatorId, location}
     height: '600px'
   }
   const [showMap, setShowMap] = useState(false);
+
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
   const openMapHandler = () => setShowMap(true);
+
   const closeMapHandler = () => setShowMap(false);
+
+  const openConfirmHandler = () => setShowConfirmModal(true);
+
+  const closeConfirmHandler = () => setShowConfirmModal(false);
+
+  const confirmDeleteHandler = () => {
+    console.log('deleting...');
+    closeConfirmHandler();
+  }
   return(
     <React.Fragment>
       <Modal
@@ -26,6 +39,20 @@ const PlaceItem = ({id, image, title, description, address, creatorId, location}
         <div className="map-container">
           <Map lng={location.lng} lat={location.lat} />
         </div>
+      </Modal>
+      <Modal
+        show={showConfirmModal}
+        header="Are you sure?"
+        onCancel={closeConfirmHandler}
+        footerClass="place-item__footer-actions"
+        footer={
+          <React.Fragment>
+            <Button className="outline-primary" onClick={closeConfirmHandler}>CANCEL</Button>
+            <Button className="danger" onClick={confirmDeleteHandler}>DELETE</Button>
+          </React.Fragment>
+        }
+      >
+        <p>Are you really want to delete this post?</p>
       </Modal>
       <li className="place-item__card">
         <Card style={cardStyles} className={'place-item__card'}>
@@ -44,7 +71,7 @@ const PlaceItem = ({id, image, title, description, address, creatorId, location}
             <Button className={'warning'} to={`/places/${id}`}>
               EDIT
             </Button>
-            <Button className={'danger'}>
+            <Button className={'danger'} onClick={openConfirmHandler}>
               DELETE
             </Button>
           </div>
