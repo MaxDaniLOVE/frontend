@@ -68,7 +68,7 @@ const UpdatePlace = () => {
       );
     }
     setIsloading(false)
-  }, [setFormData, identifiedPlace.description, identifiedPlace.title, identifiedPlace]);
+  }, [setFormData, identifiedPlace.description, identifiedPlace.title]);
 
   const placeUpdateSubmitHandler = event => {
     event.preventDefault();
